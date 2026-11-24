@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReadingRush | AppADay 201</title>
+<link rel="apple-touch-icon" href="https://augustineiacopelli.github.io/appaday/icons/201.png">
+<meta name="apple-mobile-web-app-title" content="ReadingRush">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="manifest" href="https://augustineiacopelli.github.io/appaday/manifests/201.webmanifest">
+<script src="https://augustineiacopelli.github.io/appaday/save.js" defer></script>
+<script src="https://augustineiacopelli.github.io/appaday/models.js"></script>
+<script src="https://augustineiacopelli.github.io/appaday/keys.js" data-app="201" data-accent="#1F7A8C" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c1518;--panel:#152329;--panel2:#1c2f37;--line:#2a444e;
+  --text:#e9f2f4;--muted:#a3b8be;--accent:#1F7A8C;--accent-hi:#5fc3d3;
+  --good:#3fb37f;--bad:#e0676b;--warn:#e7b25a;
+}
+[hidden]{display:none !important}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;font-size:clamp(15px,3.9vw,17px);-webkit-text-size-adjust:100%}
+body{min-height:100vh;display:flex;flex-direction:column}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:#0f1c21}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:40px;height:40px;border-radius:10px;background:var(--accent);display:grid;place-items:center;font-weight:700;color:#fff}
+h1{font-size:clamp(1.05rem,4.6vw,1.3rem);margin:0}
+.sub{margin:0;color:var(--muted);font-size:.8rem}
+.top-right{display:flex;align-items:center;gap:6px}
+.backlink{color:var(--accent-hi);text-decoration:none;font-weight:600;font-size:.9rem;min-height:44px;display:inline-flex;align-items:center;padding:0 6px}
+.icon-btn{min-width:44px;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:1.15rem;cursor:pointer}
+main{flex:1;width:100%;max-width:1100px;margin:0 auto;padding:14px}
+footer{padding:12px 14px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);text-align:center}
+footer a{color:var(--accent-hi);font-weight:600;min-height:44px;display:inline-flex;align-items:center}
+.screen{display:none}
+.screen.active{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+h2{font-size:1.05rem;margin:0 0 10px}
+h3{font-size:1.05rem;margin:0 0 4px}
+h4{font-size:.9rem;margin:14px 0 4px;color:var(--accent-hi)}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.space{justify-content:space-between}
+.btn{min-height:44px;padding:10px 16px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font:inherit;font-weight:600;cursor:pointer;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.btn small{font-weight:400;color:var(--muted);font-size:.78rem}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary small{color:#dbf3f7}
+.btn.danger-btn{border-color:var(--bad);color:#ffb3b5}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn:focus-visible,.choice:focus-visible,.cell:focus-visible,.tab:focus-visible,.icon-btn:focus-visible,.backlink:focus-visible{outline:3px solid var(--accent-hi);outline-offset:2px}
+.file-btn{position:relative;overflow:hidden}
+.xp-bar,.timer-bar,.bar{height:12px;background:var(--panel2);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+.xp-bar span,.timer-bar span,.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-hi));transition:width .3s}
+.timer-bar.over span{background:var(--bad)}
+.level-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.streak-row{margin-top:10px;display:flex;align-items:baseline;gap:8px}
+.streak-row strong{font-size:1.5rem}
+.bar-row{margin:10px 0}
+.bar-label{display:flex;justify-content:space-between;font-size:.9rem;color:var(--muted);gap:8px;flex-wrap:wrap}
+.bar{height:10px;margin-top:4px;border:none;background:var(--panel2)}
+.mode-row{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:600px){.mode-row{grid-template-columns:1fr 1fr}}
+.segments{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0 12px}
+.seg{height:14px;border-radius:6px;background:var(--panel2);border:1px solid var(--line)}
+.seg.done{background:var(--accent);border-color:var(--accent)}
+.status{color:var(--muted);min-height:1.4em}
+.error{border:1px solid var(--bad);border-radius:10px;padding:10px;margin-top:10px}
+.error p{margin:0 0 10px;color:#ffc2c4}
+.test-top{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.timer-text{font-variant-numeric:tabular-nums;font-size:.95rem;color:var(--muted)}
+.pace-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.badge{padding:6px 12px;border-radius:999px;font-weight:700;font-size:.85rem}
+.badge.ahead{background:#1d4d3a;color:#9fe8c6}
+.badge.onpace{background:#1f4a55;color:#a9e3ee}
+.badge.behind{background:#5a2b2d;color:#ffc2c4}
+.tabs{display:flex;gap:6px;margin-bottom:10px}
+.tab{flex:1;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font:inherit;font-weight:600;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.split{display:block}
+.pane{margin-bottom:0}
+.stem{font-size:clamp(1rem,4vw,1.15rem);font-weight:600;line-height:1.45;margin:0 0 12px}
+.choices{display:grid;gap:8px;margin-bottom:10px}
+.choice{display:flex;gap:10px;align-items:flex-start;width:100%;min-height:44px;text-align:left;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font:inherit;cursor:pointer;line-height:1.4}
+.choice .letter{flex:0 0 28px;height:28px;border-radius:8px;background:var(--panel);display:grid;place-items:center;font-weight:700;color:var(--accent-hi)}
+.choice.picked{border-color:var(--accent-hi);background:#1d3d47}
+.choice.correct{border-color:var(--good)}
+.choice.wrong{border-color:var(--bad)}
+.choice:disabled{cursor:default}
+.q-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.q-actions .btn{flex:1 1 auto}
+.passage{font-family:'Source Serif 4',Georgia,serif;font-size:clamp(1rem,3.8vw,1.1rem);line-height:1.65;margin:0 0 12px}
+.ptitle{font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;margin:0 0 4px}
+.pattr{color:var(--muted);font-style:italic;font-size:.9rem;margin:0 0 12px}
+.plabel{font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-hi);margin:14px 0 6px}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:14px}
+.cell{min-height:44px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font:inherit;font-weight:600;cursor:pointer}
+.cell.answered{background:#1f4a55;border-color:var(--accent)}
+.cell.skipped{border-color:var(--warn);color:var(--warn)}
+.cell.flagged{box-shadow:inset 0 -4px 0 var(--warn)}
+.cell.current{outline:2px solid var(--accent-hi);outline-offset:1px}
+.finish-row{margin-top:14px;display:flex;justify-content:flex-end}
+.explain{border-left:4px solid var(--line);background:var(--panel2);border-radius:10px;padding:12px;margin-top:12px}
+.explain.ok{border-left-color:var(--good)}
+.explain.bad{border-left-color:var(--bad)}
+.explain.skip{border-left-color:var(--warn)}
+.explain p{margin:6px 0}
+.explain-head{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.verdict{font-weight:700}
+.chip{display:inline-block;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.8rem;color:var(--accent-hi)}
+.trap{color:#ffc9cb}
+.why{line-height:1.5}
+.all-traps{margin-top:8px}
+.big{font-size:clamp(2.2rem,11vw,3rem);font-weight:700;margin:4px 0}
+.review-list{display:grid;gap:6px;margin-bottom:10px}
+.review-item{min-height:44px;text-align:left;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font:inherit;cursor:pointer}
+.review-item.ok{border-left:4px solid var(--good)}
+.review-item.bad{border-left:4px solid var(--bad)}
+.review-item.skip{border-left:4px solid var(--warn)}
+.skill-chip{display:inline-block;margin:0 6px 6px 0;padding:4px 10px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);font-size:.85rem}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center;padding:12px;z-index:50}
+.modal.top{z-index:70}
+@media(min-width:600px){.modal{align-items:center}}
+.modal-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;width:100%;max-width:520px;max-height:90vh;overflow:auto}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.field{display:grid;gap:6px;margin-bottom:12px;color:var(--muted)}
+.field input{min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font:inherit;padding:8px 10px}
+.danger{margin-top:14px}
+.levelup{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;pointer-events:none;z-index:60;box-shadow:0 8px 24px rgba(0,0,0,.4);text-align:center;max-width:90vw}
+@media(max-width:899px){
+  .tabs{display:flex}
+  .split.tab-passage .question-panel{display:none}
+  .split.tab-questions .passage-panel{display:none}
+}
+@media(min-width:900px){
+  .tabs{display:none}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+  .passage-panel{max-height:80vh;overflow:auto;position:sticky;top:10px}
+  .grid{grid-template-columns:repeat(9,1fr)}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">RR</span>
+    <div><h1>ReadingRush</h1><p class="sub">AppADay 201</p></div>
+  </div>
+  <div class="top-right">
+    <a class="backlink" href="https://augustineiacopelli.github.io/appaday/">AppADay</a>
+    <button id="gearBtn" class="icon-btn" type="button" aria-label="Settings">&#9881;</button>
+  </div>
+</header>
+
+<main>
+  <section id="scrHome" class="screen active">
+    <div class="card">
+      <div class="level-row"><span>Level <strong id="levelNum">1</strong></span><span id="xpText" class="muted small"></span></div>
+      <div class="xp-bar"><span id="xpFill"></span></div>
+      <div class="streak-row"><span class="muted">Streak</span><strong id="streakNum">0</strong><span class="muted">days</span></div>
+    </div>
+    <div class="card">
+      <h2>Accuracy by category</h2>
+      <div id="catBars"></div>
+    </div>
+    <div class="mode-row">
+      <button id="bossBtn" class="btn primary" type="button">Boss Round<small>36 questions, 40 minutes</small></button>
+      <button id="drillBtn" class="btn" type="button">Drill<small>9 questions, 10 minutes</small></button>
+    </div>
+  </section>
+
+  <section id="scrGenerating" class="screen">
+    <div class="card">
+      <h2>Preparing your round</h2>
+      <div id="segments" class="segments"></div>
+      <p id="genStatus" class="status"></p>
+      <div id="genError" class="error" hidden>
+        <p id="genErrorText"></p>
+        <div class="row">
+          <button id="genRetry" class="btn primary" type="button">Retry generation</button>
+          <button id="genBack" class="btn" type="button">Back</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="scrTest" class="screen">
+    <div class="test-top">
+      <div class="row space">
+        <button id="quitBtn" class="btn" type="button">Quit</button>
+        <span id="timerText" class="timer-text"></span>
+      </div>
+      <div id="timerBar" class="timer-bar"><span id="timerFill"></span></div>
+      <div class="pace-row">
+        <span id="paceBadge" class="badge onpace">On Pace</span>
+        <span id="paceCount" class="muted small"></span>
+        <span id="qCounter" class="muted small"></span>
+      </div>
+    </div>
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab" data-tab="passage" role="tab" aria-selected="false">Passage</button>
+      <button type="button" class="tab" data-tab="questions" role="tab" aria-selected="true">Questions</button>
+    </div>
+    <div id="split" class="split tab-questions">
+      <article id="passagePanel" class="card pane passage-panel"></article>
+      <section id="questionPanel" class="card pane question-panel">
+        <p id="qStem" class="stem"></p>
+        <div id="qChoices" class="choices"></div>
+        <div class="q-actions">
+          <button id="prevBtn" class="btn" type="button">Previous</button>
+          <button id="flagBtn" class="btn" type="button">Flag</button>
+          <button id="skipBtn" class="btn" type="button">Skip</button>
+          <button id="nextBtn" class="btn primary" type="button">Next</button>
+        </div>
+        <div id="explainSlot"></div>
+        <div id="reviewGrid" class="grid" hidden></div>
+        <div class="finish-row"><button id="finishBtn" class="btn" type="button">Finish round</button></div>
+      </section>
+    </div>
+  </section>
+
+  <section id="scrResults" class="screen">
+    <div id="resultsCard" class="card"></div>
+    <div class="card">
+      <h2>Review</h2>
+      <p class="muted small">Tap a question to see its explanation.</p>
+      <div id="reviewList" class="review-list"></div>
+      <div id="reviewSlot"></div>
+    </div>
+    <button id="homeBtn" class="btn primary" type="button" style="width:100%">Back to home</button>
+  </section>
+</main>
+
+<footer>
+  <a href="https://augustineiacopelli.github.io/appaday/">AppADay portfolio</a>
+  <span> &middot; ReadingRush 201</span>
+</footer>
+
+<div id="settingsModal" class="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="modal-head">
+      <h2 id="settingsTitle">Settings</h2>
+      <button id="settingsClose" class="btn" type="button">Close</button>
+    </div>
+    <label class="field">Session name
+      <input id="sessionName" type="text" maxlength="60" autocomplete="off">
+    </label>
+    <div id="keysMount"></div>
+    <div class="row">
+      <button id="exportBtn" class="btn" type="button">Export progress</button>
+      <label class="btn file-btn">Import progress
+        <input id="importFile" type="file" accept="application/json,.json" hidden>
+      </label>
+    </div>
+    <a id="exportLink" hidden></a>
+    <p id="settingsMsg" class="status small" role="status"></p>
+    <div class="danger">
+      <button id="resetBtn" class="btn danger-btn" type="button">Reset progress</button>
+    </div>
+  </div>
+</div>
+
+<div id="confirmModal" class="modal top" hidden>
+  <div class="modal-box">
+    <p id="confirmMsg"></p>
+    <div class="row space">
+      <button id="confirmNo" class="btn" type="button">Cancel</button>
+      <button id="confirmYes" class="btn primary" type="button">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div id="levelUp" class="levelup" hidden role="status"></div>
+<script>
+'use strict';
+
+/* ===== Config ===== */
+var SECTIONS = [
+  {
+    id: 'reading',
+    name: 'Reading Comprehension',
+    paceSeconds: 67,
+    boss: {
+      questions: 36,
+      seconds: 2400,
+      sets: [
+        { length: 'long', paired: false },
+        { length: 'short', paired: false },
+        { length: 'short', paired: true },
+        { length: 'long', paired: false }
+      ]
+    },
+    drill: {
+      questions: 9,
+      seconds: 600,
+      sets: [ { length: 'short', paired: false } ]
+    },
+    passageTypes: ['literary narrative', 'social science', 'humanities', 'natural science'],
+    lengths: { short: 450, long: 750, pairedEach: 350 },
+    categories: {
+      KID: { name: 'Key Ideas and Details', target: 0.58, min: 0.55, max: 0.60 },
+      CS:  { name: 'Craft and Structure', target: 0.28, min: 0.25, max: 0.30 },
+      IKI: { name: 'Integration of Knowledge and Ideas', target: 0.14, min: 0.13, max: 0.18 }
+    },
+    tokens: { passage: 1800, question: 3500 }
+  }
+];
+
+var CATS = ['KID', 'CS', 'IKI'];
+var LETTERS = ['A', 'B', 'C', 'D'];
+var STORE_KEY = 'readingrush.v1';
+var API_URL = 'https://api.anthropic.com/v1/messages';
+var MAX_SET_FAILURES = 2;
+var PRIOR_RATE = 0.6;
+var PRIOR_MIN_ANSWERS = 10;
+var ROLLING_WINDOW = 60;
+var HISTORY_CAP = 100;
+var RECENT_TOPIC_CAP = 15;
+var XP_RULES = { correct: 10, fast: 5, boss: 60, drill: 15, streakMin: 3, streakMult: 1.1 };
+
+/* ===== Small helpers ===== */
+function $(id) { return document.getElementById(id); }
+
+function h(tag, opts, kids) {
+  var node = document.createElement(tag);
+  opts = opts || {};
+  if (opts.cls) node.className = opts.cls;
+  if (opts.text !== undefined) node.textContent = opts.text;
+  if (opts.attrs) { for (var a in opts.attrs) node.setAttribute(a, opts.attrs[a]); }
+  if (opts.props) { for (var p in opts.props) node[p] = opts.props[p]; }
+  if (opts.on) { for (var ev in opts.on) node.addEventListener(ev, opts.on[ev]); }
+  (kids || []).forEach(function (k) {
+    if (k === null || k === undefined || k === false || k === '') return;
+    node.appendChild(typeof k === 'string' ? document.createTextNode(k) : k);
+  });
+  return node;
+}
+
+function isStr(x) { return typeof x === 'string' && x.trim().length > 0; }
+function num(v, fallback) { return (typeof v === 'number' && isFinite(v)) ? v : fallback; }
+function pct(x) { return Math.round(x * 100) + '%'; }
+function fmt(ms) {
+  var s = Math.max(0, Math.floor(ms / 1000));
+  var m = Math.floor(s / 60);
+  return m + ':' + String(s % 60).padStart(2, '0');
+}
+function wordCount(paragraphs) {
+  return paragraphs.join(' ').split(/\s+/).filter(Boolean).length;
+}
+function paraOf(x) {
+  var arr = null;
+  if (Array.isArray(x)) arr = x;
+  else if (x && Array.isArray(x.paragraphs)) arr = x.paragraphs;
+  if (!arr) return null;
+  var clean = arr.filter(isStr).map(function (s) { return s.trim(); });
+  return clean.length ? clean : null;
+}
+function inRange(words, target) { return words >= target * 0.65 && words <= target * 1.35; }
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+function wrongChoices(q) { return [0, 1, 2, 3].filter(function (i) { return i !== q.answerIndex; }); }
+
+/* ===== Storage ===== */
+function emptyCat() { return { correct: 0, total: 0, last: [] }; }
+
+function defaultState() {
+  return {
+    xp: 0,
+    level: 1,
+    streak: 0,
+    lastPlayedDay: null,
+    stats: { KID: emptyCat(), CS: emptyCat(), IKI: emptyCat() },
+    history: [],
+    recentTopics: [],
+    settings: { sessionName: '' }
+  };
+}
+
+function mergeState(p) {
+  var d = defaultState();
+  if (!p || typeof p !== 'object') return d;
+  d.xp = num(p.xp, 0);
+  d.streak = num(p.streak, 0);
+  d.lastPlayedDay = typeof p.lastPlayedDay === 'string' ? p.lastPlayedDay : null;
+  CATS.forEach(function (c) {
+    var s = p.stats && p.stats[c];
+    if (s && typeof s === 'object') {
+      d.stats[c].correct = num(s.correct, 0);
+      d.stats[c].total = num(s.total, 0);
+      d.stats[c].last = Array.isArray(s.last)
+        ? s.last.filter(function (x) { return typeof x === 'boolean'; }).slice(-ROLLING_WINDOW)
+        : [];
+    }
+  });
+  d.history = Array.isArray(p.history) ? p.history.slice(-HISTORY_CAP) : [];
+  d.recentTopics = Array.isArray(p.recentTopics)
+    ? p.recentTopics.filter(isStr).slice(-RECENT_TOPIC_CAP) : [];
+  if (p.settings && typeof p.settings === 'object' && isStr(p.settings.sessionName)) {
+    d.settings.sessionName = p.settings.sessionName.slice(0, 60);
+  }
+  d.level = levelFromXP(d.xp);
+  return d;
+}
+
+function loadState() {
+  try {
+    var raw = localStorage.getItem(STORE_KEY);
+    return raw ? mergeState(JSON.parse(raw)) : defaultState();
+  } catch (e) {
+    return defaultState();
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify(store));
+  } catch (e) {
+    console.warn('ReadingRush: could not save progress', e);
+  }
+}
+
+var store = defaultState();
+
+/* ===== Levels, streaks, days ===== */
+// XP needed to reach a level. Each step from level L to L+1 costs 100 x L x 1.4 = 140 x L,
+// so the cumulative threshold for level L is 70 x (L-1) x L.
+function cumulativeFor(level) { return 70 * (level - 1) * level; }
+function levelFromXP(xp) {
+  var L = 1;
+  while (xp >= cumulativeFor(L + 1)) L++;
+  return L;
+}
+
+function localDay(d) {
+  d = d || new Date();
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+function yesterdayOf(day) {
+  var parts = day.split('-').map(Number);
+  var dt = new Date(parts[0], parts[1] - 1, parts[2]);
+  dt.setDate(dt.getDate() - 1);
+  return localDay(dt);
+}
+
+// Increments when the last play was yesterday, holds when it was today, otherwise resets to 1.
+function updateStreak(today) {
+  today = today || localDay();
+  if (store.lastPlayedDay === today) return;
+  if (store.lastPlayedDay && store.lastPlayedDay === yesterdayOf(today)) store.streak += 1;
+  else store.streak = 1;
+  store.lastPlayedDay = today;
+}
+
+/* ===== Weighting and count distribution ===== */
+// Largest-remainder split of n questions across categories by their target shares.
+function baseCounts(n) {
+  var cats = SECTIONS[0].categories;
+  var out = {};
+  var used = 0;
+  CATS.forEach(function (c) { out[c] = Math.floor(cats[c].target * n); used += out[c]; });
+  var order = CATS.slice().sort(function (a, b) {
+    var fa = cats[a].target * n - Math.floor(cats[a].target * n);
+    var fb = cats[b].target * n - Math.floor(cats[b].target * n);
+    return fb - fa;
+  });
+  for (var i = 0; i < n - used; i++) out[order[i % order.length]]++;
+  return out;
+}
+
+// Accuracy uses the 60 percent prior until a category has 10 answers.
+// Up to two questions move from the strongest category to the weakest,
+// staying inside each category's range (rounded from the config min and max shares).
+function computeWeights(stats, n) {
+  var cats = SECTIONS[0].categories;
+  var acc = {};
+  CATS.forEach(function (c) {
+    var last = (stats && stats[c] && stats[c].last) || [];
+    acc[c] = last.length < PRIOR_MIN_ANSWERS
+      ? PRIOR_RATE
+      : last.filter(Boolean).length / last.length;
+  });
+  var totals = baseCounts(n);
+  var lo = {}, hi = {};
+  CATS.forEach(function (c) {
+    lo[c] = Math.round(cats[c].min * n);
+    hi[c] = Math.max(lo[c], Math.round(cats[c].max * n));
+  });
+  for (var step = 0; step < 2; step++) {
+    var donors = CATS.filter(function (c) { return totals[c] > lo[c]; })
+      .sort(function (a, b) { return acc[b] - acc[a]; });
+    var recips = CATS.filter(function (c) { return totals[c] < hi[c]; })
+      .sort(function (a, b) { return acc[a] - acc[b]; });
+    var moved = false;
+    for (var i = 0; i < donors.length && !moved; i++) {
+      for (var j = 0; j < recips.length; j++) {
+        var d = donors[i], r = recips[j];
+        if (d !== r && acc[d] > acc[r]) {
+          totals[d]--;
+          totals[r]++;
+          moved = true;
+          break;
+        }
+      }
+    }
+    if (!moved) break;
+  }
+  return { totals: totals, acc: acc };
+}
+
+// Splits category totals across sets. Paired sets are filled first so all IKI questions land there.
+function distributeCounts(totals, sets) {
+  var remaining = { KID: totals.KID, CS: totals.CS, IKI: totals.IKI };
+  var out = new Array(sets.length);
+  var order = sets.map(function (s, i) { return i; }).sort(function (a, b) {
+    var pa = sets[a].paired ? 1 : 0, pb = sets[b].paired ? 1 : 0;
+    return (pb - pa) || (a - b);
+  });
+  order.forEach(function (i) {
+    var s = sets[i];
+    var c = { KID: 0, CS: 0, IKI: 0 };
+    var slots = s.size;
+    if (s.paired) {
+      var take = Math.min(remaining.IKI, slots);
+      c.IKI += take;
+      remaining.IKI -= take;
+      slots -= take;
+    }
+    while (slots > 0) {
+      var pick = null;
+      CATS.forEach(function (cat) {
+        if (remaining[cat] > 0 && (pick === null || remaining[cat] > remaining[pick])) pick = cat;
+      });
+      if (pick === null) break;
+      c[pick]++;
+      remaining[pick]--;
+      slots--;
+    }
+    out[i] = c;
+  });
+  return out;
+}
+
+function buildSpecs(mode) {
+  var sec = SECTIONS[0];
+  var cfg = mode === 'boss' ? sec.boss : sec.drill;
+  var weights = computeWeights(store.stats, cfg.questions);
+  var perSet = cfg.questions / cfg.sets.length;
+  var counts = distributeCounts(weights.totals, cfg.sets.map(function (s) {
+    return { paired: s.paired, size: perSet };
+  }));
+  var types = shuffle(sec.passageTypes);
+  return cfg.sets.map(function (s, i) {
+    return {
+      length: s.length,
+      paired: s.paired,
+      type: types[i % types.length],
+      counts: counts[i]
+    };
+  });
+}
+
+/* ===== API key (keys.js) and model (models.js) ===== */
+var apiKey = null;
+
+// Asks for the key only when none is stored. A null result means the user declined.
+async function getApiKey() {
+  if (!window.AppKeys || typeof AppKeys.get !== 'function') return null;
+  try { return (await AppKeys.get()) || null; } catch (e) { return null; }
+}
+
+function modelId() {
+  if (!window.AppModels || typeof AppModels.id !== 'function') {
+    throw new Error('The model list did not load. Reload the page.');
+  }
+  return AppModels.id('sonnet');
+}
+
+/* ===== Claude calls ===== */
+async function postMessages(body, key) {
+  var res = await fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'x-api-key': key,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify(body)
+  });
+  var data = null;
+  try { data = await res.json(); } catch (e) { /* non-JSON error body */ }
+  if (!res.ok) {
+    var msg = (data && data.error && data.error.message) || ('HTTP ' + res.status);
+    var err = new Error(msg);
+    err.status = res.status;
+    throw err;
+  }
+  return data;
+}
+
+// Text blocks only. Question calls try extended thinking first and fall back
+// to a plain call if the model or API rejects the thinking parameter.
+async function callClaude(prompt, maxTokens, opts) {
+  opts = opts || {};
+  var key = apiKey;
+  if (!key) throw new Error('No API key. Add one in Settings.');
+  var model = modelId();
+  var base = { model: model, max_tokens: maxTokens, messages: [{ role: 'user', content: prompt }] };
+  var tries = opts.thinking
+    ? [{ thinking: { type: 'enabled', budget_tokens: 1200 } }, {}]
+    : [{}];
+  var lastError = null;
+  for (var t = 0; t < tries.length; t++) {
+    var extra = tries[t];
+    try {
+      var data = await postMessages(Object.assign({}, base, extra), key);
+      console.log('stop_reason', data.stop_reason);
+      if (data.stop_reason === 'max_tokens') throw new Error('Reply was cut off at the token limit.');
+      var text = (data.content || []).filter(function (b) { return b.type === 'text'; })
+        .map(function (b) { return b.text; }).join('');
+      if (!text.trim()) throw new Error('Empty reply from the model.');
+      return text;
+    } catch (e) {
+      lastError = e;
+      var thinkingRejected = extra.thinking && e.status === 400 && /thinking/i.test(e.message);
+      if (!thinkingRejected) throw e;
+    }
+  }
+  throw lastError;
+}
+
+function parseOutermost(text) {
+  var clean = text.replace(/```(?:json)?/gi, '');
+  var s = clean.indexOf('{');
+  var e = clean.lastIndexOf('}');
+  if (s < 0 || e < s) throw new Error('no JSON object found');
+  return JSON.parse(clean.slice(s, e + 1));
+}
+
+// Calls the model, parses the outermost object, validates it, and retries once
+// with the validation error appended to the prompt.
+async function callJSON(prompt, maxTokens, validator, opts) {
+  var lastErr = 'unknown error';
+  var p = prompt;
+  for (var attempt = 0; attempt < 2; attempt++) {
+    if (attempt > 0) {
+      p = prompt + '\n\nYour previous reply was rejected: ' + lastErr +
+        '\nReturn the corrected JSON object only.';
+    }
+    var text = await callClaude(p, maxTokens, opts);
+    var obj;
+    try {
+      obj = parseOutermost(text);
+    } catch (e) {
+      lastErr = 'The output was not valid JSON (' + e.message + ').';
+      continue;
+    }
+    var err = validator(obj);
+    if (!err) return obj;
+    lastErr = err;
+  }
+  throw new Error(lastErr);
+}
+
+/* ===== Prompts ===== */
+function buildPassagePrompt(type, length, paired, recentTopics) {
+  var L = SECTIONS[0].lengths;
+  var shape = paired
+    ? 'Write two short passages, Passage A and Passage B, each about ' + L.pairedEach +
+      ' words. They should address one shared theme from two different perspectives or sources, so a reader can compare them.'
+    : 'Write one passage of about ' + (length === 'long' ? L.long : L.short) + ' words, in 4 to 7 paragraphs.';
+  var avoid = recentTopics.length
+    ? 'Do not use any of these recently used topics: ' + recentTopics.join('; ') + '.'
+    : '';
+  var schema = paired
+    ? '{"title":"...","attribution":"...","type":"' + type + '","topic":"...","passageA":{"label":"...","paragraphs":["..."]},"passageB":{"label":"...","paragraphs":["..."]}}'
+    : '{"title":"...","attribution":"...","type":"' + type + '","topic":"...","paragraphs":["..."]}';
+  return [
+    'You are writing an original reading passage for a timed reading comprehension exam.',
+    'Passage type: ' + type + '.',
+    shape,
+    'The text must be original. The attribution must name a fictional author and an invented source title, for example "Lena Marrow, from the essay collection Tidewater Notes". It must not name any real publication or real living person.',
+    'Do not reproduce, closely paraphrase, or imitate any published text. Do not quote or depict real living people.',
+    'Make the passage engaging, well organized, and at a challenging high school to first-year college level. Use plain text only: no markdown, no headings, no lists.',
+    avoid,
+    'Return only one JSON object, with no markdown and no commentary, in this shape:',
+    schema
+  ].filter(Boolean).join('\n');
+}
+
+function passageText(p) {
+  if (p.paired) {
+    var a = p.passageA, b = p.passageB;
+    return 'PASSAGE A' + (a.label ? ' (' + a.label + ')' : '') + ':\n' + a.paragraphs.join('\n\n') +
+      '\n\nPASSAGE B' + (b.label ? ' (' + b.label + ')' : '') + ':\n' + b.paragraphs.join('\n\n');
+  }
+  return p.paragraphs.join('\n\n');
+}
+
+function buildQuestionPrompt(passage, counts) {
+  var total = counts.KID + counts.CS + counts.IKI;
+  return [
+    'You are writing reading comprehension questions for the passage below.',
+    'Write exactly ' + total + ' multiple-choice questions: exactly ' + counts.KID + ' with category KID, ' +
+      counts.CS + ' with category CS, and ' + counts.IKI + ' with category IKI.',
+    'Category meanings: KID = Key Ideas and Details (main idea, supporting details, what the text states or implies). ' +
+      'CS = Craft and Structure (word meaning in context, text organization, author purpose, tone, point of view). ' +
+      'IKI = Integration of Knowledge and Ideas (weighing claims, evidence, and reasoning, and connecting ideas' +
+      (passage.paired ? ' between Passage A and Passage B' : '') + ').',
+    passage.paired
+      ? 'Every IKI question must ask about the relationship between Passage A and Passage B (agreement, contrast, or how one extends or challenges the other), and its stem must say so.'
+      : 'IKI questions should ask the reader to evaluate or connect the text claims, evidence, or reasoning.',
+    'Each question must be answerable from the passage alone. Give each question exactly four choices with exactly one correct answer. Make distractors plausible and similar in length to the correct answer. Vary the position of the correct answer.',
+    'For every wrong choice, write a trap note naming the specific reasoning error that choice represents. Use an empty string as the trap note for the correct choice.',
+    'Give a short skill label for each question, for example: central idea, inference, vocabulary in context, text structure, author purpose, comparing sources.',
+    'answerIndex is the zero-based index of the correct choice in choices.',
+    'Return only one JSON object, with no markdown and no commentary, in this shape:',
+    '{"questions":[{"stem":"...","choices":["...","...","...","..."],"answerIndex":0,"category":"KID","skill":"...","whyCorrect":"...","trapNotes":["","...","...","..."]}]}',
+    '',
+    'PASSAGE',
+    passageText(passage)
+  ].join('\n');
+}
+
+/* ===== Validators (return an error string, or null when valid) ===== */
+function validatePassage(o, spec) {
+  if (!o || typeof o !== 'object' || Array.isArray(o)) return 'The reply must be one JSON object.';
+  if (!isStr(o.title)) return 'Missing title.';
+  if (!isStr(o.attribution)) return 'Missing attribution.';
+  if (!isStr(o.topic)) return 'Missing topic.';
+  var L = SECTIONS[0].lengths;
+  if (spec.paired) {
+    var a = paraOf(o.passageA), b = paraOf(o.passageB);
+    if (!a || !b) return 'Paired sets need passageA and passageB, each with a paragraphs array of strings.';
+    var wa = wordCount(a), wb = wordCount(b);
+    if (!inRange(wa, L.pairedEach)) return 'Passage A has ' + wa + ' words; it should be about ' + L.pairedEach + '.';
+    if (!inRange(wb, L.pairedEach)) return 'Passage B has ' + wb + ' words; it should be about ' + L.pairedEach + '.';
+  } else {
+    var p = paraOf(o);
+    if (!p) return 'Missing paragraphs array of strings.';
+    var target = spec.length === 'long' ? L.long : L.short;
+    var w = wordCount(p);
+    if (!inRange(w, target)) return 'The passage has ' + w + ' words; it should be about ' + target + '.';
+  }
+  return null;
+}
+
+function validateQuestions(o, counts, paired) {
+  if (!o || !Array.isArray(o.questions)) return 'Expected a "questions" array.';
+  var total = counts.KID + counts.CS + counts.IKI;
+  if (o.questions.length !== total) return 'Expected ' + total + ' questions, got ' + o.questions.length + '.';
+  var tally = { KID: 0, CS: 0, IKI: 0 };
+  for (var i = 0; i < o.questions.length; i++) {
+    var q = o.questions[i];
+    var at = 'Question ' + (i + 1) + ': ';
+    if (!q || !isStr(q.stem)) return at + 'missing stem.';
+    if (!Array.isArray(q.choices) || q.choices.length !== 4 || !q.choices.every(isStr)) return at + 'needs exactly 4 non-empty choices.';
+    if (!Number.isInteger(q.answerIndex) || q.answerIndex < 0 || q.answerIndex > 3) return at + 'answerIndex must be 0 to 3.';
+    if (CATS.indexOf(q.category) < 0) return at + 'category must be KID, CS, or IKI.';
+    tally[q.category]++;
+    if (!isStr(q.skill)) return at + 'missing skill.';
+    if (!isStr(q.whyCorrect)) return at + 'missing whyCorrect.';
+    if (!Array.isArray(q.trapNotes) || q.trapNotes.length !== 4) return at + 'trapNotes needs 4 entries.';
+    for (var c = 0; c < 4; c++) {
+      if (c === q.answerIndex) continue;
+      if (!isStr(q.trapNotes[c])) return at + 'trap note missing for choice ' + LETTERS[c] + '.';
+    }
+    if (paired && q.category === 'IKI' && !/passage|both|relationship|compare|contrast/i.test(q.stem)) {
+      return at + 'paired IKI questions must address the relationship between passages.';
+    }
+  }
+  for (var k = 0; k < CATS.length; k++) {
+    var cat = CATS[k];
+    if (tally[cat] !== counts[cat]) {
+      return 'Category counts must be exactly KID ' + counts.KID + ', CS ' + counts.CS + ', IKI ' + counts.IKI + '.';
+    }
+  }
+  return null;
+}
+
+/* ===== Set generation: passage call chained to its question call ===== */
+function normalizePassage(raw, spec) {
+  var out = {
+    title: raw.title.trim(),
+    attribution: raw.attribution.trim(),
+    type: spec.type,
+    topic: raw.topic.trim(),
+    paired: !!spec.paired
+  };
+  if (spec.paired) {
+    out.passageA = { label: isStr(raw.passageA.label) ? raw.passageA.label.trim() : '', paragraphs: paraOf(raw.passageA) };
+    out.passageB = { label: isStr(raw.passageB.label) ? raw.passageB.label.trim() : '', paragraphs: paraOf(raw.passageB) };
+  } else {
+    out.paragraphs = paraOf(raw);
+  }
+  return out;
+}
+
+function shuffleChoices(q) {
+  var order = shuffle([0, 1, 2, 3]);
+  return Object.assign({}, q, {
+    choices: order.map(function (i) { return q.choices[i]; }),
+    trapNotes: order.map(function (i) { return q.trapNotes[i]; }),
+    answerIndex: order.indexOf(q.answerIndex)
+  });
+}
+
+function noteTopic(topic) {
+  store.recentTopics.push(topic);
+  if (store.recentTopics.length > RECENT_TOPIC_CAP) {
+    store.recentTopics = store.recentTopics.slice(-RECENT_TOPIC_CAP);
+  }
+}
+
+async function makeSet(spec) {
+  var tokens = SECTIONS[0].tokens;
+  var raw = await callJSON(
+    buildPassagePrompt(spec.type, spec.length, spec.paired, store.recentTopics),
+    tokens.passage,
+    function (o) { return validatePassage(o, spec); }
+  );
+  var passage = normalizePassage(raw, spec);
+  var qraw = await callJSON(
+    buildQuestionPrompt(passage, spec.counts),
+    tokens.question,
+    function (o) { return validateQuestions(o, spec.counts, spec.paired); },
+    { thinking: true }
+  );
+  noteTopic(passage.topic);
+  return { passage: passage, questions: qraw.questions.map(shuffleChoices) };
+}
+
+/* ===== Generation queue: concurrency 2, regenerate only failed sets, two failures allowed ===== */
+var gen = null;
+
+async function pregenerate(mode) {
+  var specs = buildSpecs(mode);
+  gen = {
+    mode: mode, specs: specs, sets: new Array(specs.length).fill(null),
+    failures: 0, aborted: false, error: null, status: 'Starting'
+  };
+  renderGenerating();
+  var current = gen;
+  var queue = specs.map(function (s, i) { return i; });
+
+  async function worker() {
+    while (queue.length && !current.aborted) {
+      var i = queue.shift();
+      current.status = 'Writing set ' + (i + 1) + ' of ' + specs.length + '...';
+      renderGenerating();
+      try {
+        current.sets[i] = await makeSet(specs[i]);
+      } catch (e) {
+        current.failures++;
+        console.warn('ReadingRush: set ' + (i + 1) + ' failed', e);
+        if (current.failures > MAX_SET_FAILURES) {
+          current.aborted = true;
+          current.error = e.message;
+        } else {
+          current.status = 'Set ' + (i + 1) + ' failed, regenerating it...';
+          queue.push(i);
+        }
+      }
+      renderGenerating();
+    }
+  }
+
+  await Promise.all([worker(), worker()]);
+  if (current.aborted) throw new Error(current.error || 'Generation failed.');
+  return current.sets;
+}
+
+async function beginRound(mode) {
+  apiKey = await getApiKey();
+  if (!apiKey) { showScreen('home'); return; }
+  showScreen('generating');
+  try {
+    var sets = await pregenerate(mode);
+    startRound(mode, sets);
+  } catch (e) {
+    console.error(e);
+    if (gen) {
+      gen.aborted = true;
+      gen.error = e.message;
+      renderGenerating();
+    }
+  }
+}
+
+function renderGenerating() {
+  if (!gen) return;
+  var segs = $('segments');
+  segs.textContent = '';
+  gen.specs.forEach(function (sp, i) {
+    segs.appendChild(h('div', { cls: 'seg' + (gen.sets[i] ? ' done' : '') }));
+  });
+  $('genStatus').textContent = gen.aborted ? '' : gen.status;
+  $('genError').hidden = !gen.aborted;
+  $('genErrorText').textContent = gen.aborted ? 'Generation failed: ' + gen.error : '';
+}
+
+/* ===== Round lifecycle ===== */
+var round = null;
+var tickTimer = null;
+var levelUpTimer = null;
+var confirmAction = null;
+var activeTab = 'questions';
+
+function startRound(mode, sets) {
+  var cfg = mode === 'boss' ? SECTIONS[0].boss : SECTIONS[0].drill;
+  var questions = [];
+  sets.forEach(function (set, setIdx) {
+    set.questions.forEach(function (q) {
+      questions.push(Object.assign({}, q, {
+        setIdx: setIdx,
+        state: { answer: null, flagged: false, skipped: false, timeMs: 0 }
+      }));
+    });
+  });
+  round = {
+    mode: mode,
+    cfg: cfg,
+    sets: sets.map(function (s) { return s.passage; }),
+    questions: questions,
+    cur: 0,
+    startedAt: performance.now(),
+    focusStart: performance.now(),
+    submitted: false,
+    elapsedMs: 0,
+    summary: null,
+    renderedSet: -1
+  };
+  showScreen('test');
+  setTab('questions');
+  renderQuestion();
+  clearInterval(tickTimer);
+  tickTimer = setInterval(tick, 250);
+  tick();
+}
+
+// Time on a question is the focus time accumulated while it is the current question.
+function focusOff() {
+  if (!round || round.focusStart === null) return;
+  var q = round.questions[round.cur];
+  if (q) q.state.timeMs += performance.now() - round.focusStart;
+  round.focusStart = null;
+}
+
+function goTo(i) {
+  if (!round || round.submitted) return;
+  focusOff();
+  round.cur = Math.max(0, Math.min(round.questions.length - 1, i));
+  round.focusStart = performance.now();
+  renderQuestion();
+}
+
+function choose(i) {
+  if (!round || round.submitted) return;
+  var q = round.questions[round.cur];
+  if (round.mode === 'drill' && q.state.answer !== null) return;
+  q.state.answer = i;
+  q.state.skipped = false;
+  renderQuestion();
+}
+
+function skipCurrent() {
+  if (!round || round.submitted) return;
+  var q = round.questions[round.cur];
+  if (q.state.answer === null) q.state.skipped = true;
+  if (round.cur < round.questions.length - 1) goTo(round.cur + 1);
+  else renderQuestion();
+}
+
+function toggleFlag() {
+  if (!round || round.submitted) return;
+  var q = round.questions[round.cur];
+  q.state.flagged = !q.state.flagged;
+  renderQuestion();
+}
+
+function nextOrFinish() {
+  if (!round || round.submitted) return;
+  if (round.cur === round.questions.length - 1) finish();
+  else goTo(round.cur + 1);
+}
+
+function finish() {
+  if (!round || round.submitted) return;
+  var open = round.questions.filter(function (q) { return q.state.answer === null; }).length;
+  if (open > 0) {
+    askConfirm(open + (open === 1 ? ' question is' : ' questions are') + ' unanswered. Submit the round anyway?',
+      'Submit', function () { submitRound(false); });
+  } else {
+    submitRound(false);
+  }
+}
+
+function tick() {
+  if (!round || round.submitted) return;
+  var elapsed = performance.now() - round.startedAt;
+  var limit = round.cfg.seconds * 1000;
+  if (round.mode === 'boss' && elapsed >= limit) {
+    submitRound(true);
+    return;
+  }
+  renderTimer(elapsed, limit);
+  renderPace(elapsed);
+}
+
+// Drill timer is soft: it shows overtime and keeps the round open.
+function renderTimer(elapsed, limit) {
+  var left = limit - elapsed;
+  var frac = Math.max(0, Math.min(1, left / limit));
+  $('timerFill').style.width = (frac * 100).toFixed(1) + '%';
+  $('timerBar').classList.toggle('over', left <= 0);
+  $('timerText').textContent = left >= 0
+    ? 'Time left ' + fmt(left)
+    : 'Over time by ' + fmt(-left);
+}
+
+function renderPace(elapsed) {
+  var answered = round.questions.filter(function (q) { return q.state.answer !== null; }).length;
+  var expected = (elapsed / 1000) / SECTIONS[0].paceSeconds;
+  var diff = answered - expected;
+  var label = diff >= 1 ? 'Ahead' : (diff <= -1 ? 'Behind' : 'On Pace');
+  var cls = diff >= 1 ? 'ahead' : (diff <= -1 ? 'behind' : 'onpace');
+  var badge = $('paceBadge');
+  badge.textContent = label;
+  badge.className = 'badge ' + cls;
+  $('paceCount').textContent = answered + ' of ' + round.questions.length + ' answered';
+}
+
+function setTab(name) {
+  activeTab = name;
+  var split = $('split');
+  split.classList.remove('tab-passage', 'tab-questions');
+  split.classList.add('tab-' + name);
+  document.querySelectorAll('.tab').forEach(function (b) {
+    b.setAttribute('aria-selected', b.getAttribute('data-tab') === name ? 'true' : 'false');
+  });
+}
+
+/* ===== Rendering the test ===== */
+function renderPassage(p) {
+  var box = $('passagePanel');
+  box.textContent = '';
+  box.appendChild(h('h3', { cls: 'ptitle', text: p.title }));
+  box.appendChild(h('p', { cls: 'pattr', text: p.attribution }));
+  if (p.paired) {
+    [['Passage A', p.passageA], ['Passage B', p.passageB]].forEach(function (pair) {
+      var label = pair[0] + (pair[1].label ? ': ' + pair[1].label : '');
+      box.appendChild(h('h4', { cls: 'plabel', text: label }));
+      pair[1].paragraphs.forEach(function (t) { box.appendChild(h('p', { cls: 'passage', text: t })); });
+    });
+  } else {
+    p.paragraphs.forEach(function (t) { box.appendChild(h('p', { cls: 'passage', text: t })); });
+  }
+}
+
+function renderQuestion() {
+  if (!round) return;
+  var q = round.questions[round.cur];
+  var total = round.questions.length;
+  var isBoss = round.mode === 'boss';
+
+  if (round.renderedSet !== q.setIdx) {
+    renderPassage(round.sets[q.setIdx]);
+    round.renderedSet = q.setIdx;
+  }
+
+  $('qCounter').textContent = 'Question ' + (round.cur + 1) + ' of ' + total;
+  $('qStem').textContent = q.stem;
+
+  var answered = q.state.answer !== null;
+  var lockedDrill = !isBoss && answered;
+  var choicesBox = $('qChoices');
+  choicesBox.textContent = '';
+  q.choices.forEach(function (text, i) {
+    var cls = ['choice'];
+    if (answered && i === q.state.answer) cls.push('picked');
+    if (lockedDrill && i === q.answerIndex) cls.push('correct');
+    if (lockedDrill && i === q.state.answer && i !== q.answerIndex) cls.push('wrong');
+    choicesBox.appendChild(h('button', {
+      cls: cls.join(' '),
+      attrs: { type: 'button' },
+      props: { disabled: lockedDrill },
+      on: { click: function () { choose(i); } }
+    }, [
+      h('span', { cls: 'letter', text: LETTERS[i] }),
+      h('span', { text: text })
+    ]));
+  });
+
+  var slot = $('explainSlot');
+  slot.textContent = '';
+  if (lockedDrill) slot.appendChild(explainCard(q));
+
+  $('flagBtn').textContent = q.state.flagged ? 'Unflag' : 'Flag';
+  $('flagBtn').setAttribute('aria-pressed', q.state.flagged ? 'true' : 'false');
+  $('skipBtn').disabled = lockedDrill;
+  $('prevBtn').disabled = round.cur === 0;
+  $('nextBtn').textContent = round.cur === total - 1 ? 'Finish' : 'Next';
+
+  var grid = $('reviewGrid');
+  grid.textContent = '';
+  grid.hidden = !isBoss;
+  if (isBoss) {
+    round.questions.forEach(function (x, i) {
+      var st = x.state.answer !== null ? 'answered' : (x.state.skipped ? 'skipped' : 'open');
+      var cls = ['cell', st];
+      if (x.state.flagged) cls.push('flagged');
+      if (i === round.cur) cls.push('current');
+      grid.appendChild(h('button', {
+        cls: cls.join(' '),
+        attrs: { type: 'button', 'aria-label': 'Question ' + (i + 1) },
+        text: String(i + 1),
+        on: { click: function () { goTo(i); } }
+      }));
+    });
+  }
+}
+
+function explainCard(q) {
+  var pick = q.state.answer;
+  var skipped = pick === null;
+  var ok = !skipped && pick === q.answerIndex;
+  var verdict = skipped ? 'Skipped' : (ok ? 'Correct' : 'Not this time');
+  var cls = skipped ? 'skip' : (ok ? 'ok' : 'bad');
+  var catName = SECTIONS[0].categories[q.category].name;
+
+  var allBox = h('div', { cls: 'all-traps' }, wrongChoices(q).map(function (i) {
+    return h('p', { cls: 'trap', text: LETTERS[i] + ': ' + q.trapNotes[i] });
+  }));
+  allBox.hidden = true;
+  var toggle = h('button', { cls: 'btn', attrs: { type: 'button' }, text: 'Reveal all traps' });
+  toggle.addEventListener('click', function () {
+    allBox.hidden = !allBox.hidden;
+    toggle.textContent = allBox.hidden ? 'Reveal all traps' : 'Hide traps';
+  });
+
+  return h('div', { cls: 'explain ' + cls }, [
+    h('div', { cls: 'explain-head' }, [
+      h('span', { cls: 'verdict', text: verdict }),
+      h('span', { cls: 'chip', text: q.category + ' | ' + catName })
+    ]),
+    h('p', { cls: 'muted small', text: 'Skill: ' + q.skill }),
+    skipped ? null : h('p', { text: 'Your pick: ' + LETTERS[pick] + '. ' + q.choices[pick] }),
+    h('p', { text: 'Correct answer: ' + LETTERS[q.answerIndex] + '. ' + q.choices[q.answerIndex] }),
+    h('p', { cls: 'why', text: q.whyCorrect }),
+    (!skipped && !ok) ? h('p', { cls: 'trap', text: 'Trap in your pick: ' + q.trapNotes[pick] }) : null,
+    h('div', { cls: 'row' }, [toggle]),
+    allBox
+  ]);
+}
+
+/* ===== Scoring ===== */
+function computeSummary(r) {
+  var paceMs = SECTIONS[0].paceSeconds * 1000;
+  var perCat = {};
+  CATS.forEach(function (c) { perCat[c] = { correct: 0, total: 0, answered: 0 }; });
+  var missed = {};
+  var correct = 0, answered = 0, under = 0, fastCorrect = 0, timeSum = 0;
+  r.questions.forEach(function (q) {
+    var pc = perCat[q.category];
+    pc.total++;
+    var pick = q.state.answer;
+    var ok = pick !== null && pick === q.answerIndex;
+    if (pick !== null) {
+      answered++;
+      pc.answered++;
+      timeSum += q.state.timeMs;
+      if (q.state.timeMs < paceMs) under++;
+    }
+    if (ok) {
+      correct++;
+      pc.correct++;
+      if (q.state.timeMs < paceMs) fastCorrect++;
+    } else {
+      missed[q.skill] = (missed[q.skill] || 0) + 1;
+    }
+  });
+  var weak = Object.keys(missed).sort(function (a, b) { return missed[b] - missed[a]; }).slice(0, 3)
+    .map(function (s) { return { skill: s, misses: missed[s] }; });
+  return {
+    total: r.questions.length,
+    correct: correct,
+    answered: answered,
+    under: under,
+    fastCorrect: fastCorrect,
+    avgSec: answered ? (timeSum / 1000) / answered : 0,
+    perCat: perCat,
+    weak: weak,
+    complete: answered === r.questions.length,
+    elapsedSec: Math.round(r.elapsedMs / 1000)
+  };
+}
+
+function submitRound(auto) {
+  if (!round || round.submitted) return;
+  focusOff();
+  var limit = round.cfg.seconds * 1000;
+  round.elapsedMs = auto ? limit : (performance.now() - round.startedAt);
+  round.submitted = true;
+  clearInterval(tickTimer);
+  if (confirmAction) closeConfirm();
+
+  var s = computeSummary(round);
+
+  // Rolling per-category stats, updated only for answered questions.
+  round.questions.forEach(function (q) {
+    if (q.state.answer === null) return;
+    var ok = q.state.answer === q.answerIndex;
+    var st = store.stats[q.category];
+    st.total++;
+    if (ok) st.correct++;
+    st.last.push(ok);
+    if (st.last.length > ROLLING_WINDOW) st.last.splice(0, st.last.length - ROLLING_WINDOW);
+  });
+
+  updateStreak();
+  var base = s.correct * XP_RULES.correct + s.fastCorrect * XP_RULES.fast;
+  if (s.complete) base += round.mode === 'boss' ? XP_RULES.boss : XP_RULES.drill;
+  var mult = store.streak >= XP_RULES.streakMin ? XP_RULES.streakMult : 1;
+  var earned = Math.floor(base * mult);
+  var before = store.level;
+  store.xp += earned;
+  store.level = levelFromXP(store.xp);
+  s.earned = earned;
+  s.mult = mult;
+  s.leveledUp = store.level > before;
+
+  var perCategory = {};
+  CATS.forEach(function (c) { perCategory[c] = { correct: s.perCat[c].correct, total: s.perCat[c].total }; });
+  store.history.push({
+    mode: round.mode,
+    date: localDay(),
+    score: s.correct,
+    total: s.total,
+    timeUsed: s.elapsedSec,
+    perCategory: perCategory,
+    xp: earned
+  });
+  if (store.history.length > HISTORY_CAP) store.history = store.history.slice(-HISTORY_CAP);
+
+  round.summary = s;
+  saveState();
+  renderResults();
+  showScreen('results');
+  if (s.leveledUp) showLevelUp(store.level);
+}
+
+function showLevelUp(level) {
+  var box = $('levelUp');
+  box.textContent = 'Level up! You reached level ' + level;
+  box.hidden = false;
+  clearTimeout(levelUpTimer);
+  levelUpTimer = setTimeout(function () { box.hidden = true; }, 2600);
+}
+
+function renderResults() {
+  var r = round, s = r.summary;
+  var isBoss = r.mode === 'boss';
+  var box = $('resultsCard');
+  box.textContent = '';
+  box.appendChild(h('h2', { text: isBoss ? 'Boss Round complete' : 'Drill complete' }));
+  box.appendChild(h('div', { cls: 'big', text: s.correct + ' / ' + s.total }));
+  box.appendChild(h('p', { cls: 'muted', text: 'Raw score out of ' + s.total }));
+
+  CATS.forEach(function (c) {
+    var pc = s.perCat[c];
+    var acc = pc.total ? pc.correct / pc.total : 0;
+    var mix = s.total ? pc.total / s.total : 0;
+    var track = h('div', { cls: 'bar' });
+    var fill = h('span');
+    fill.style.width = (acc * 100).toFixed(1) + '%';
+    track.appendChild(fill);
+    box.appendChild(h('div', { cls: 'bar-row' }, [
+      h('div', { cls: 'bar-label' }, [
+        h('span', { text: SECTIONS[0].categories[c].name }),
+        h('span', { text: pc.correct + ' of ' + pc.total + ' correct (' + pct(acc) + ')' })
+      ]),
+      track,
+      h('p', { cls: 'muted small', text: 'Question mix ' + pct(mix) + ' against a target of ' + pct(SECTIONS[0].categories[c].target) })
+    ]));
+  });
+
+  var limitSec = Math.round(r.cfg.seconds);
+  box.appendChild(h('p', { text: 'Time used ' + fmt(s.elapsedSec * 1000) + ' of ' + fmt(limitSec * 1000) }));
+  box.appendChild(h('p', { text: 'Average ' + s.avgSec.toFixed(1) + ' seconds per answered question' }));
+  box.appendChild(h('p', { text: s.under + ' of ' + s.answered + ' answered under the ' + SECTIONS[0].paceSeconds + ' second pace' }));
+
+  box.appendChild(h('h3', { text: 'Weakest skills' }));
+  if (s.weak.length) {
+    box.appendChild(h('div', {}, s.weak.map(function (w) {
+      return h('span', { cls: 'skill-chip', text: w.skill + ' (' + w.misses + ' missed)' });
+    })));
+  } else {
+    box.appendChild(h('p', { cls: 'muted', text: 'No misses this round.' }));
+  }
+
+  box.appendChild(h('p', {
+    text: 'XP earned: +' + s.earned + (s.mult > 1 ? ' (includes the 1.1x streak bonus)' : '') +
+      '. Level ' + store.level + ', streak ' + store.streak + ' day' + (store.streak === 1 ? '' : 's') + '.'
+  }));
+
+  var list = $('reviewList');
+  list.textContent = '';
+  r.questions.forEach(function (q, i) {
+    var st = q.state.answer === null ? 'skip' : (q.state.answer === q.answerIndex ? 'ok' : 'bad');
+    var label = st === 'skip' ? 'Skipped' : (st === 'ok' ? 'Correct' : 'Missed');
+    list.appendChild(h('button', {
+      cls: 'review-item ' + st,
+      attrs: { type: 'button' },
+      text: 'Q' + (i + 1) + '  ' + label + '  ' + q.category + '  ' + q.skill,
+      on: { click: function () { showReview(i); } }
+    }));
+  });
+  $('reviewSlot').textContent = '';
+}
+
+function showReview(i) {
+  var slot = $('reviewSlot');
+  slot.textContent = '';
+  slot.appendChild(explainCard(round.questions[i]));
+}
+
+/* ===== Screens, home, confirm, settings ===== */
+function showScreen(name) {
+  var map = { home: 'scrHome', generating: 'scrGenerating', test: 'scrTest', results: 'scrResults' };
+  Object.keys(map).forEach(function (k) {
+    $(map[k]).classList.toggle('active', k === name);
+  });
+  window.scrollTo(0, 0);
+}
+
+function renderHome() {
+  $('levelNum').textContent = store.level;
+  var lo = cumulativeFor(store.level), hi = cumulativeFor(store.level + 1);
+  var frac = Math.max(0, Math.min(1, (store.xp - lo) / (hi - lo)));
+  $('xpFill').style.width = (frac * 100).toFixed(1) + '%';
+  $('xpText').textContent = store.xp + ' XP, ' + (hi - store.xp) + ' to level ' + (store.level + 1);
+  $('streakNum').textContent = store.streak;
+
+  var box = $('catBars');
+  box.textContent = '';
+  CATS.forEach(function (c) {
+    var st = store.stats[c];
+    var n = st.last.length;
+    var acc = n ? st.last.filter(Boolean).length / n : 0;
+    var track = h('div', { cls: 'bar' });
+    var fill = h('span');
+    fill.style.width = (acc * 100).toFixed(1) + '%';
+    track.appendChild(fill);
+    box.appendChild(h('div', { cls: 'bar-row' }, [
+      h('div', { cls: 'bar-label' }, [
+        h('span', { text: SECTIONS[0].categories[c].name }),
+        h('span', { text: n ? pct(acc) + ' over last ' + n : 'no answers yet' })
+      ]),
+      track
+    ]));
+  });
+}
+
+var confirmAction = null;
+function askConfirm(msg, yesLabel, onYes) {
+  $('confirmMsg').textContent = msg;
+  $('confirmYes').textContent = yesLabel || 'Confirm';
+  confirmAction = onYes;
+  $('confirmModal').hidden = false;
+}
+function closeConfirm() {
+  $('confirmModal').hidden = true;
+  confirmAction = null;
+}
+
+function openSettings() {
+  $('sessionName').value = store.settings.sessionName || '';
+  $('settingsMsg').textContent = '';
+  var mount = $('keysMount');
+  if (window.AppKeys && typeof AppKeys.mountSettings === 'function' && !mount.dataset.mounted) {
+    try {
+      AppKeys.mountSettings(mount);
+      mount.dataset.mounted = '1';
+    } catch (e) {
+      console.warn('ReadingRush: AppKeys could not mount', e);
+    }
+  }
+  $('settingsModal').hidden = false;
+}
+
+function mergeFromFile(text) {
+  var parsed;
+  try { parsed = JSON.parse(text); } catch (e) { parsed = null; }
+  if (!parsed || typeof parsed !== 'object' || typeof parsed.xp !== 'number' || !parsed.stats) {
+    $('settingsMsg').textContent = 'That file is not a ReadingRush backup.';
+    return;
+  }
+  askConfirm('Importing replaces your current progress. Continue?', 'Import', function () {
+    store = mergeState(parsed);
+    saveState();
+    renderHome();
+    $('settingsMsg').textContent = 'Progress imported.';
+  });
+}
+
+function exportProgress() {
+  var blob = new Blob([JSON.stringify(store, null, 2)], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var link = $('exportLink');
+  link.href = url;
+  link.download = 'readingrush-backup.json';
+  link.click();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  $('settingsMsg').textContent = 'Backup downloaded.';
+}
+
+function quitRound() {
+  askConfirm('Leave this round? Progress in it will not be saved.', 'Leave', function () {
+    round = null;
+    clearInterval(tickTimer);
+    renderHome();
+    showScreen('home');
+  });
+}
+
+/* ===== Wiring ===== */
+function wire() {
+  $('bossBtn').addEventListener('click', function () { beginRound('boss'); });
+  $('drillBtn').addEventListener('click', function () { beginRound('drill'); });
+  $('genRetry').addEventListener('click', function () { beginRound(gen ? gen.mode : 'boss'); });
+  $('genBack').addEventListener('click', function () { gen = null; renderHome(); showScreen('home'); });
+
+  $('quitBtn').addEventListener('click', quitRound);
+  $('prevBtn').addEventListener('click', function () { goTo(round.cur - 1); });
+  $('nextBtn').addEventListener('click', nextOrFinish);
+  $('skipBtn').addEventListener('click', skipCurrent);
+  $('flagBtn').addEventListener('click', toggleFlag);
+  $('finishBtn').addEventListener('click', finish);
+  document.querySelectorAll('.tab').forEach(function (b) {
+    b.addEventListener('click', function () { setTab(b.getAttribute('data-tab')); });
+  });
+
+  $('homeBtn').addEventListener('click', function () {
+    round = null;
+    renderHome();
+    showScreen('home');
+  });
+
+  $('gearBtn').addEventListener('click', openSettings);
+  $('settingsClose').addEventListener('click', function () { $('settingsModal').hidden = true; });
+  $('sessionName').addEventListener('change', function (e) {
+    store.settings.sessionName = e.target.value.trim().slice(0, 60);
+    saveState();
+  });
+  $('exportBtn').addEventListener('click', exportProgress);
+  $('importFile').addEventListener('change', function (e) {
+    var f = e.target.files[0];
+    e.target.value = '';
+    if (!f) return;
+    var reader = new FileReader();
+    reader.onload = function () { mergeFromFile(String(reader.result)); };
+    reader.readAsText(f);
+  });
+  $('resetBtn').addEventListener('click', function () {
+    askConfirm('Reset all ReadingRush progress? This cannot be undone.', 'Reset', function () {
+      store = defaultState();
+      saveState();
+      renderHome();
+      $('settingsMsg').textContent = 'Progress reset.';
+    });
+  });
+  $('confirmNo').addEventListener('click', closeConfirm);
+  $('confirmYes').addEventListener('click', function () {
+    var run = confirmAction;
+    closeConfirm();
+    if (run) run();
+  });
+}
+
+function init() {
+  store = loadState();
+  wire();
+  renderHome();
+  showScreen('home');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
